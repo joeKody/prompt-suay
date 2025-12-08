@@ -312,7 +312,7 @@ const frameTextPosition = ref<'top' | 'bottom' | 'left' | 'right'>('bottom')
 const showFrame = ref(false)
 
 //#region /* Default QR code text */
-const defaultQRCodeText = computed(() => t('Have nice day!'))
+const defaultQRCodeText = computed(() => t('Donate to me pls'))
 
 const frameStyle = ref<FrameStyle>({
   textColor: '#000000',
@@ -1077,7 +1077,7 @@ const updateDataFromModal = (newData: string) => {
             <StyledQRCode
               v-bind="{
                 ...qrCodeProps,
-                data: data?.length > 0 ? data : t('Have nice day!'),
+                data: data?.length > 0 ? data : t('Donate to me pls'),
                 width: PREVIEW_QRCODE_DIM_UNIT,
                 height: PREVIEW_QRCODE_DIM_UNIT
               }"
@@ -1087,7 +1087,7 @@ const updateDataFromModal = (newData: string) => {
           </div>
         </div>
         <div class="mt-4 flex flex-col items-center gap-8">
-          <div class="flex flex-col items-center justify-center gap-3">
+          <div class="hidden flex-col items-center justify-center gap-3">
             <button
               v-if="exportMode !== ExportMode.Batch"
               id="copy-qr-image-button"
@@ -1165,7 +1165,7 @@ const updateDataFromModal = (newData: string) => {
           </div>
           <section
             id="export-options"
-            class="flex flex-col gap-4 rounded-lg border border-zinc-300 p-4 dark:border-zinc-700"
+            class="flex flex-col mt-2 gap-4 rounded-lg border border-zinc-300 p-4 dark:border-zinc-700"
           >
             <h2
               class="mx-auto -mt-[30px] bg-white px-4 text-zinc-900 dark:bg-zinc-900 dark:text-zinc-100"
@@ -1182,7 +1182,7 @@ const updateDataFromModal = (newData: string) => {
                   v-model="exportFilename"
                 />
               </div>
-              <div class="flex flex-row items-center justify-center gap-2">
+              <div class="flex flex-col items-center justify-center gap-2">
                 <button
                   id="download-qr-image-button-png"
                   class="button"
@@ -1195,28 +1195,7 @@ const updateDataFromModal = (newData: string) => {
                   "
                   :aria-label="t('Download QR Code as PNG')"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                  >
-                    <g fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-                      <path d="M5 12V5a2 2 0 0 1 2-2h7l5 5v4" />
-                      <text
-                        x="1"
-                        y="22"
-                        fill="currentColor"
-                        stroke="none"
-                        font-size="11px"
-                        font-family="monospace"
-                        font-weight="600"
-                      >
-                        PNG
-                      </text>
-                    </g>
-                  </svg>
+                    Download as PNG
                 </button>
                 <button
                   id="download-qr-image-button-jpg"
@@ -1230,28 +1209,7 @@ const updateDataFromModal = (newData: string) => {
                   "
                   :aria-label="t('Download QR Code as JPG')"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                  >
-                    <g fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-                      <path d="M5 12V5a2 2 0 0 1 2-2h7l5 5v4" />
-                      <text
-                        x="1"
-                        y="22"
-                        fill="currentColor"
-                        stroke="none"
-                        font-size="11px"
-                        font-family="monospace"
-                        font-weight="600"
-                      >
-                        JPG
-                      </text>
-                    </g>
-                  </svg>
+                    Download as JPG
                 </button>
                 <button
                   id="download-qr-image-button-svg"
@@ -1265,28 +1223,7 @@ const updateDataFromModal = (newData: string) => {
                   "
                   :aria-label="t('Download QR Code as SVG')"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                  >
-                    <g fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-                      <path d="M5 12V5a2 2 0 0 1 2-2h7l5 5v4" />
-                      <text
-                        x="1"
-                        y="22"
-                        fill="currentColor"
-                        stroke="none"
-                        font-size="11px"
-                        font-family="monospace"
-                        font-weight="600"
-                      >
-                        SVG
-                      </text>
-                    </g>
-                  </svg>
+                    Download as SVG
                 </button>
               </div>
             </div>
@@ -1300,152 +1237,13 @@ const updateDataFromModal = (newData: string) => {
       <Accordion
         type="multiple"
         collapsible
-        class="flex w-full flex-col gap-4"
+        class="flex overflow-visible w-full flex-col gap-4"
         :default-value="['qr-code-settings']"
       >
-        <AccordionItem value="frame-settings">
+        <AccordionItem value="qr-code-style-settings">
           <AccordionTrigger
             class="button !px-4 text-2xl text-gray-700 outline-none dark:text-gray-100 md:!px-6 lg:!px-8"
-            ><span class="flex flex-row items-center gap-2"
-              ><span id="frame-settings-title">{{ t('Frame settings') }}</span>
-              <span
-                class="rounded-full bg-white px-2 py-0.5 text-xs font-medium text-zinc-800 dark:bg-zinc-700 dark:text-zinc-200"
-              >
-                {{ t('New!') }}
-              </span></span
-            ></AccordionTrigger
-          >
-          <AccordionContent class="px-2 pb-8 pt-4">
-            <section class="w-full space-y-4" aria-labelledby="frame-settings-title">
-              <div class="flex flex-row items-center gap-2">
-                <label for="show-frame">{{ t('Add frame') }}</label>
-                <input id="show-frame" type="checkbox" v-model="showFrame" />
-              </div>
-
-              <template v-if="showFrame">
-                <div class="flex flex-col sm:flex-row sm:items-center sm:gap-8">
-                  <div class="flex flex-col sm:w-1/2">
-                    <label>{{ t('Frame preset') }}</label>
-                    <Combobox
-                      :items="allFramePresetOptions"
-                      v-model:value="selectedFramePresetKey"
-                      :button-label="t('Select frame preset')"
-                    />
-                  </div>
-                </div>
-                <div class="flex flex-col">
-                  <label class="mb-2 block">{{ t('Text position') }}</label>
-                  <fieldset class="flex-1">
-                    <div
-                      class="radio"
-                      v-for="position in ['top', 'bottom', 'right', 'left']"
-                      :key="position"
-                    >
-                      <input
-                        :id="'frameTextPosition-' + position"
-                        type="radio"
-                        v-model="frameTextPosition"
-                        :value="position"
-                      />
-                      <label :for="'frameTextPosition-' + position">{{ t(position) }}</label>
-                    </div>
-                  </fieldset>
-                </div>
-                <div>
-                  <div class="mb-2 flex flex-row items-center gap-2">
-                    <label for="frame-text">{{ t('Frame text') }}</label>
-                  </div>
-                  <textarea
-                    name="frame-text"
-                    class="text-input"
-                    id="frame-text"
-                    rows="2"
-                    :placeholder="defaultFrameText"
-                    v-model="frameText"
-                  />
-                </div>
-                <div>
-                  <label class="mb-2 block">{{ t('Frame style') }}</label>
-                  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                    <div>
-                      <label for="frame-text-color" class="mb-1 block text-sm">{{
-                        t('Text color')
-                      }}</label>
-                      <input
-                        id="frame-text-color"
-                        type="color"
-                        class="color-input"
-                        v-model="frameStyle.textColor"
-                      />
-                    </div>
-                    <div>
-                      <label for="frame-bg-color" class="mb-1 block text-sm">{{
-                        t('Background color')
-                      }}</label>
-                      <input
-                        id="frame-bg-color"
-                        type="color"
-                        class="color-input"
-                        v-model="frameStyle.backgroundColor"
-                      />
-                    </div>
-                    <div>
-                      <label for="frame-border-color" class="mb-1 block text-sm">{{
-                        t('Border color')
-                      }}</label>
-                      <input
-                        id="frame-border-color"
-                        type="color"
-                        class="color-input"
-                        v-model="frameStyle.borderColor"
-                      />
-                    </div>
-                    <div>
-                      <label for="frame-border-width" class="mb-1 block text-sm">{{
-                        t('Border width')
-                      }}</label>
-                      <input
-                        id="frame-border-width"
-                        type="text"
-                        class="text-input"
-                        v-model="frameStyle.borderWidth"
-                        placeholder="1px"
-                      />
-                    </div>
-                    <div>
-                      <label for="frame-border-radius" class="mb-1 block text-sm">{{
-                        t('Border radius')
-                      }}</label>
-                      <input
-                        id="frame-border-radius"
-                        type="text"
-                        class="text-input"
-                        v-model="frameStyle.borderRadius"
-                        placeholder="8px"
-                      />
-                    </div>
-                    <div>
-                      <label for="frame-padding" class="mb-1 block text-sm">{{
-                        t('Padding')
-                      }}</label>
-                      <input
-                        id="frame-padding"
-                        type="text"
-                        class="text-input"
-                        v-model="frameStyle.padding"
-                        placeholder="16px"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </template>
-            </section>
-          </AccordionContent>
-        </AccordionItem>
-        <AccordionItem value="qr-code-settings">
-          <AccordionTrigger
-            class="button !px-4 text-2xl text-gray-700 outline-none dark:text-gray-100 md:!px-6 lg:!px-8"
-            ><span id="qr-code-settings-title">{{ t('QR code settings') }}</span></AccordionTrigger
+            ><span id="qr-code-settings-title">{{ t('QR style settings') }}</span></AccordionTrigger
           >
           <AccordionContent class="px-2 pb-8 pt-4">
             <section class="w-full space-y-4" aria-labelledby="qr-code-settings-title">
@@ -1476,208 +1274,6 @@ const updateDataFromModal = (newData: string) => {
                       />
                     </svg>
                   </button>
-                </div>
-              </div>
-              <div class="w-full">
-                <div class="flex w-full flex-col flex-wrap gap-4 sm:flex-row sm:gap-x-8">
-                  <!-- Data to encode area -->
-                  <div class="w-full sm:grow">
-                    <!-- Header row: Label + Mode Toggles + Batch Options -->
-                    <div class="mb-2 flex items-center gap-4">
-                      <label for="data">{{ t('Data to encode') }}</label>
-                      <!-- Mode Toggle Buttons -->
-                      <div class="flex grow items-center gap-2">
-                        <button
-                          :class="[
-                            'secondary-button',
-                            { 'opacity-50': exportMode === ExportMode.Single } // Dim if active
-                          ]"
-                          @click="exportMode = ExportMode.Single"
-                        >
-                          {{ $t('Single export') }}
-                        </button>
-                        <button
-                          :class="[
-                            'secondary-button',
-                            { 'opacity-50': exportMode === ExportMode.Batch } // Dim if active
-                          ]"
-                          @click="exportMode = ExportMode.Batch"
-                        >
-                          {{ $t('Batch export') }}
-                        </button>
-                        <!-- Batch specific options -->
-                        <div
-                          v-if="exportMode === ExportMode.Batch"
-                          :class="[
-                            'flex grow items-center justify-end gap-2',
-                            dataStringsFromCsv.length > 0 && 'opacity-80'
-                          ]"
-                        ></div>
-                      </div>
-                    </div>
-                    <!-- Single Mode Input -->
-                    <div v-if="exportMode === ExportMode.Single" class="flex flex-col items-start">
-                      <textarea
-                        id="data"
-                        v-model="data"
-                        class="me-2 grow text-input"
-                        :placeholder="t('data to encode e.g. a URL or a string')"
-                      ></textarea>
-                      <button
-                        @click="openDataModal"
-                        aria-haspopup="dialog"
-                        :aria-expanded="isDataModalVisible"
-                        class="secondary-button mt-2 flex items-center gap-1 self-end"
-                        :aria-label="t('Open data type generator')"
-                      >
-                        <span>{{ t('Data templates') }}</span>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                        >
-                          <!-- Icon from Tabler Icons by Paweł Kuna - https://github.com/tabler/tabler-icons/blob/master/LICENSE -->
-                          <path
-                            fill="none"
-                            stroke="#888888"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="m7 7l5 5l-5 5m6-10l5 5l-5 5"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                    <template v-if="exportMode === ExportMode.Batch">
-                      <template v-if="!inputFileForBatchEncoding">
-                        <BatchExportFieldsGuide />
-                        <button
-                          class="!ms-0 mt-4 flex items-center justify-center rounded-lg border-2 border-dashed border-gray-300 p-1 py-4 text-center text-input"
-                          :aria-label="t('Choose a CSV file containing data to encode')"
-                          @click="fileInput?.click()"
-                          @keyup.enter="fileInput?.click()"
-                          @keyup.space="fileInput?.click()"
-                          @dragover.prevent
-                          @drop.prevent="onBatchInputFileUpload"
-                        >
-                          <div class="flex flex-col items-center">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="48"
-                              height="48"
-                              viewBox="0 0 24 24"
-                              class="mb-2 text-gray-400"
-                            >
-                              <path
-                                fill="currentColor"
-                                d="M11 16V7.85l-2.6 2.6L7 9l5-5l5 5l-1.4 1.45l-2.6-2.6V16h-2Zm-5 4q-.825 0-1.413-.588T4 18v-3h2v3h12v-3h2v3q0 .825-.588 1.413T18 20H6Z"
-                              />
-                            </svg>
-                            <p aria-hidden="true" class="text-sm">
-                              {{ $t('Upload a CSV file') }}
-                            </p>
-                          </div>
-                          <input
-                            ref="fileInput"
-                            type="file"
-                            accept=".csv,.txt"
-                            class="hidden"
-                            @change="onBatchInputFileUpload"
-                          />
-                        </button>
-                      </template>
-                      <div v-else-if="isValidCsv" class="p-4 text-center">
-                        <div v-if="isBatchExportSuccess">
-                          <p>{{ $t('QR codes have been successfully exported.') }}</p>
-                          <button class="button mt-4" @click="inputFileForBatchEncoding = null">
-                            {{ $t('Start new batch export') }}
-                          </button>
-                        </div>
-                        <div v-else-if="currentExportedQrCodeIndex == null && !isExportingBatchQRs">
-                          <div v-if="dataStringsFromCsv.length > 0" class="mt-4">
-                            <div
-                              class="flex flex-col gap-2 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800"
-                            >
-                              <div v-if="previewRow && 'firstName' in previewRow">
-                                <VCardPreview :vCard="previewRow" />
-                              </div>
-                              <div v-else>
-                                <div class="space-y-2">
-                                  <div class="flex flex-col gap-1">
-                                    <span
-                                      class="text-xs font-medium text-gray-500 dark:text-gray-400"
-                                      >{{ $t('Data') }}</span
-                                    >
-                                    <code
-                                      class="rounded bg-white px-2 py-1 font-mono text-sm dark:bg-gray-900"
-                                    >
-                                      {{ dataStringsFromCsv[previewRowIndex] }}
-                                    </code>
-                                  </div>
-                                  <div v-if="frameTextsFromCsv[previewRowIndex]">
-                                    <span
-                                      class="text-xs font-medium text-gray-500 dark:text-gray-400"
-                                      >{{ $t('Frame text') }}</span
-                                    >
-                                    <code
-                                      class="rounded bg-white px-2 py-1 font-mono text-sm dark:bg-gray-900"
-                                    >
-                                      {{ frameTextsFromCsv[previewRowIndex] }}
-                                    </code>
-                                  </div>
-                                  <div v-if="fileNamesFromCsv[previewRowIndex]">
-                                    <span
-                                      class="text-xs font-medium text-gray-500 dark:text-gray-400"
-                                      >{{ $t('File name') }}</span
-                                    >
-                                    <code
-                                      class="rounded bg-white px-2 py-1 font-mono text-sm dark:bg-gray-900"
-                                    >
-                                      {{ fileNamesFromCsv[previewRowIndex] }}
-                                    </code>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="mt-2 flex items-center justify-between">
-                                <button
-                                  class="rounded bg-gray-200 px-2 py-1 text-gray-700 disabled:opacity-50 dark:bg-gray-700 dark:text-gray-200 dark:disabled:opacity-60"
-                                  :disabled="previewRowIndex === 0"
-                                  @click="previewRowIndex--"
-                                >
-                                  &lt;
-                                </button>
-                                <span class="text-xs text-gray-500 dark:text-gray-400"
-                                  >{{ previewRowIndex + 1 }} / {{ dataStringsFromCsv.length }}</span
-                                >
-                                <button
-                                  class="rounded bg-gray-200 px-2 py-1 text-gray-700 disabled:opacity-50 dark:bg-gray-700 dark:text-gray-200 dark:disabled:opacity-60"
-                                  :disabled="previewRowIndex === dataStringsFromCsv.length - 1"
-                                  @click="previewRowIndex++"
-                                >
-                                  &gt;
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div v-else-if="currentExportedQrCodeIndex != null">
-                          <p>{{ $t('Creating QR codes... This may take a while.') }}</p>
-                          <p>
-                            {{
-                              $t('{index} / {count} QR codes have been created.', {
-                                index: currentExportedQrCodeIndex + 1,
-                                count: dataStringsFromCsv.length
-                              })
-                            }}
-                          </p>
-                        </div>
-                      </div>
-                      <div v-else class="p-4 text-center text-red-500">
-                        <p>{{ $t('Invalid CSV') }}</p>
-                      </div>
-                    </template>
-                  </div>
                 </div>
               </div>
               <div class="w-full">
@@ -1880,7 +1476,224 @@ const updateDataFromModal = (newData: string) => {
                     <label :for="'cornersDotOptionsType-' + type">{{ t(type) }}</label>
                   </div>
                 </fieldset>
-                <fieldset class="flex-1">
+              </div>
+            </section>
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="qr-code-data-settings">
+          <AccordionTrigger
+            class="button !px-4 text-2xl text-gray-700 outline-none dark:text-gray-100 md:!px-6 lg:!px-8"
+            ><span id="qr-code-settings-title">{{ t('QR data settings') }}</span> </AccordionTrigger
+          >
+          <AccordionContent>
+            <section class="w-full space-y-4 pt-4" aria-labelledby="qr-code-settings-title">
+              <div class="w-full">
+                <div class="flex w-full flex-col flex-wrap gap-4 sm:flex-row sm:gap-x-8">
+                  <!-- Data to encode area -->
+                  <div class="w-full sm:grow">
+                    <!-- Header row: Label + Mode Toggles + Batch Options -->
+                    <div class="mb-2 flex items-center gap-4">
+                      <label for="data">{{ t('Data to encode') }}</label>
+                      <span
+                        class="inline-flex items-center rounded-full bg-zinc-100 px-2 py-0.5 text-xs font-medium text-zinc-800 dark:bg-zinc-700 dark:text-zinc-200"
+                      >
+                        {{"Use Data template for Promptpay settings"}}
+                      </span>
+                      <!-- Mode Toggle Buttons -->
+                      <div class="hidden grow items-center gap-2">
+                        <button
+                          :class="[
+                            'secondary-button',
+                            { 'opacity-50': exportMode === ExportMode.Single } // Dim if active
+                          ]"
+                          @click="exportMode = ExportMode.Single"
+                        >
+                          {{ $t('Single export') }}
+                        </button>
+                        <button
+                          :class="[
+                            'secondary-button',
+                            { 'opacity-50': exportMode === ExportMode.Batch } // Dim if active
+                          ]"
+                          @click="exportMode = ExportMode.Batch"
+                        >
+                          {{ $t('Batch export') }}
+                        </button>
+                        <!-- Batch specific options -->
+                        <div
+                          v-if="exportMode === ExportMode.Batch"
+                          :class="[
+                            'flex grow items-center justify-end gap-2',
+                            dataStringsFromCsv.length > 0 && 'opacity-80'
+                          ]"
+                        ></div>
+                      </div>
+                    </div>
+                    <!-- Single Mode Input -->
+                    <div v-if="exportMode === ExportMode.Single" class="flex flex-col items-start">
+                      <textarea
+                        id="data"
+                        v-model="data"
+                        class="me-2 grow text-input"
+                        :placeholder="t('data to encode e.g. a URL or a string')"
+                      ></textarea>
+                      <button
+                        @click="openDataModal"
+                        aria-haspopup="dialog"
+                        :aria-expanded="isDataModalVisible"
+                        class="secondary-button mt-2 flex items-center gap-1 self-start"
+                        :aria-label="t('Open data type generator')"
+                      >
+                        <span>{{ t('Data templates') }}</span>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                        >
+                          <!-- Icon from Tabler Icons by Paweł Kuna - https://github.com/tabler/tabler-icons/blob/master/LICENSE -->
+                          <path
+                            fill="none"
+                            stroke="#888888"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="m7 7l5 5l-5 5m6-10l5 5l-5 5"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                    <template v-if="exportMode === ExportMode.Batch">
+                      <template v-if="!inputFileForBatchEncoding">
+                        <BatchExportFieldsGuide />
+                        <button
+                          class="!ms-0 mt-4 flex items-center justify-center rounded-lg border-2 border-dashed border-gray-300 p-1 py-4 text-center text-input"
+                          :aria-label="t('Choose a CSV file containing data to encode')"
+                          @click="fileInput?.click()"
+                          @keyup.enter="fileInput?.click()"
+                          @keyup.space="fileInput?.click()"
+                          @dragover.prevent
+                          @drop.prevent="onBatchInputFileUpload"
+                        >
+                          <div class="flex flex-col items-center">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="48"
+                              height="48"
+                              viewBox="0 0 24 24"
+                              class="mb-2 text-gray-400"
+                            >
+                              <path
+                                fill="currentColor"
+                                d="M11 16V7.85l-2.6 2.6L7 9l5-5l5 5l-1.4 1.45l-2.6-2.6V16h-2Zm-5 4q-.825 0-1.413-.588T4 18v-3h2v3h12v-3h2v3q0 .825-.588 1.413T18 20H6Z"
+                              />
+                            </svg>
+                            <p aria-hidden="true" class="text-sm">
+                              {{ $t('Upload a CSV file') }}
+                            </p>
+                          </div>
+                          <input
+                            ref="fileInput"
+                            type="file"
+                            accept=".csv,.txt"
+                            class="hidden"
+                            @change="onBatchInputFileUpload"
+                          />
+                        </button>
+                      </template>
+                      <div v-else-if="isValidCsv" class="p-4 text-center">
+                        <div v-if="isBatchExportSuccess">
+                          <p>{{ $t('QR codes have been successfully exported.') }}</p>
+                          <button class="button mt-4" @click="inputFileForBatchEncoding = null">
+                            {{ $t('Start new batch export') }}
+                          </button>
+                        </div>
+                        <div v-else-if="currentExportedQrCodeIndex == null && !isExportingBatchQRs">
+                          <div v-if="dataStringsFromCsv.length > 0" class="mt-4">
+                            <div
+                              class="flex flex-col gap-2 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800"
+                            >
+                              <div v-if="previewRow && 'firstName' in previewRow">
+                                <VCardPreview :vCard="previewRow" />
+                              </div>
+                              <div v-else>
+                                <div class="space-y-2">
+                                  <div class="flex flex-col gap-1">
+                                    <span
+                                      class="text-xs font-medium text-gray-500 dark:text-gray-400"
+                                      >{{ $t('Data') }}</span
+                                    >
+                                    <code
+                                      class="rounded bg-white px-2 py-1 font-mono text-sm dark:bg-gray-900"
+                                    >
+                                      {{ dataStringsFromCsv[previewRowIndex] }}
+                                    </code>
+                                  </div>
+                                  <div v-if="frameTextsFromCsv[previewRowIndex]">
+                                    <span
+                                      class="text-xs font-medium text-gray-500 dark:text-gray-400"
+                                      >{{ $t('Frame text') }}</span
+                                    >
+                                    <code
+                                      class="rounded bg-white px-2 py-1 font-mono text-sm dark:bg-gray-900"
+                                    >
+                                      {{ frameTextsFromCsv[previewRowIndex] }}
+                                    </code>
+                                  </div>
+                                  <div v-if="fileNamesFromCsv[previewRowIndex]">
+                                    <span
+                                      class="text-xs font-medium text-gray-500 dark:text-gray-400"
+                                      >{{ $t('File name') }}</span
+                                    >
+                                    <code
+                                      class="rounded bg-white px-2 py-1 font-mono text-sm dark:bg-gray-900"
+                                    >
+                                      {{ fileNamesFromCsv[previewRowIndex] }}
+                                    </code>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="mt-2 flex items-center justify-between">
+                                <button
+                                  class="rounded bg-gray-200 px-2 py-1 text-gray-700 disabled:opacity-50 dark:bg-gray-700 dark:text-gray-200 dark:disabled:opacity-60"
+                                  :disabled="previewRowIndex === 0"
+                                  @click="previewRowIndex--"
+                                >
+                                  &lt;
+                                </button>
+                                <span class="text-xs text-gray-500 dark:text-gray-400"
+                                  >{{ previewRowIndex + 1 }} / {{ dataStringsFromCsv.length }}</span
+                                >
+                                <button
+                                  class="rounded bg-gray-200 px-2 py-1 text-gray-700 disabled:opacity-50 dark:bg-gray-700 dark:text-gray-200 dark:disabled:opacity-60"
+                                  :disabled="previewRowIndex === dataStringsFromCsv.length - 1"
+                                  @click="previewRowIndex++"
+                                >
+                                  &gt;
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div v-else-if="currentExportedQrCodeIndex != null">
+                          <p>{{ $t('Creating QR codes... This may take a while.') }}</p>
+                          <p>
+                            {{
+                              $t('{index} / {count} QR codes have been created.', {
+                                index: currentExportedQrCodeIndex + 1,
+                                count: dataStringsFromCsv.length
+                              })
+                            }}
+                          </p>
+                        </div>
+                      </div>
+                      <div v-else class="p-4 text-center text-red-500">
+                        <p>{{ $t('Invalid CSV') }}</p>
+                      </div>
+                    </template>
+                  </div>
+                </div>
+              </div>
                   <div class="flex flex-row items-center gap-2">
                     <legend>{{ t('Error correction level') }}</legend>
                     <a
@@ -1925,8 +1738,149 @@ const updateDataFromModal = (newData: string) => {
                       </span>
                     </div>
                   </div>
-                </fieldset>
+            </section>
+          </AccordionContent>
+        </AccordionItem>
+
+        <AccordionItem value="frame-settings">
+          <AccordionTrigger
+            class="button !px-4 text-2xl text-gray-700 outline-none dark:text-gray-100 md:!px-6 lg:!px-8"
+            ><span class="flex flex-row items-center gap-2"
+              ><span id="frame-settings-title">{{ t('Frame settings') }}</span>
+              <!-- 
+              <span
+                class="rounded-full bg-white px-2 py-0.5 text-xs font-medium text-zinc-800 dark:bg-zinc-700 dark:text-zinc-200"
+              >
+                {{ t('New!') }}
+              </span>
+               -->
+              </span
+            ></AccordionTrigger
+          >
+          <AccordionContent class="px-2 pb-8 pt-4">
+            <section class="w-full space-y-4" aria-labelledby="frame-settings-title">
+              <div class="flex flex-row items-center gap-2">
+                <label for="show-frame">{{ t('Add frame') }}</label>
+                <input id="show-frame" type="checkbox" v-model="showFrame" />
               </div>
+
+              <template v-if="showFrame">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:gap-8">
+                  <div class="flex flex-col sm:w-1/2">
+                    <label>{{ t('Frame preset') }}</label>
+                    <Combobox
+                      :items="allFramePresetOptions"
+                      v-model:value="selectedFramePresetKey"
+                      :button-label="t('Select frame preset')"
+                    />
+                  </div>
+                </div>
+                <div class="flex flex-col">
+                  <label class="mb-2 block">{{ t('Text position') }}</label>
+                  <fieldset class="flex-1">
+                    <div
+                      class="radio"
+                      v-for="position in ['top', 'bottom', 'right', 'left']"
+                      :key="position"
+                    >
+                      <input
+                        :id="'frameTextPosition-' + position"
+                        type="radio"
+                        v-model="frameTextPosition"
+                        :value="position"
+                      />
+                      <label :for="'frameTextPosition-' + position">{{ t(position) }}</label>
+                    </div>
+                  </fieldset>
+                </div>
+                <div>
+                  <div class="mb-2 flex flex-row items-center gap-2">
+                    <label for="frame-text">{{ t('Frame text') }}</label>
+                  </div>
+                  <textarea
+                    name="frame-text"
+                    class="text-input"
+                    id="frame-text"
+                    rows="2"
+                    :placeholder="defaultFrameText"
+                    v-model="frameText"
+                  />
+                </div>
+                <div>
+                  <label class="mb-2 block">{{ t('Frame style') }}</label>
+                  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <div>
+                      <label for="frame-text-color" class="mb-1 block text-sm">{{
+                        t('Text color')
+                      }}</label>
+                      <input
+                        id="frame-text-color"
+                        type="color"
+                        class="color-input"
+                        v-model="frameStyle.textColor"
+                      />
+                    </div>
+                    <div>
+                      <label for="frame-bg-color" class="mb-1 block text-sm">{{
+                        t('Background color')
+                      }}</label>
+                      <input
+                        id="frame-bg-color"
+                        type="color"
+                        class="color-input"
+                        v-model="frameStyle.backgroundColor"
+                      />
+                    </div>
+                    <div>
+                      <label for="frame-border-color" class="mb-1 block text-sm">{{
+                        t('Border color')
+                      }}</label>
+                      <input
+                        id="frame-border-color"
+                        type="color"
+                        class="color-input"
+                        v-model="frameStyle.borderColor"
+                      />
+                    </div>
+                    <div>
+                      <label for="frame-border-width" class="mb-1 block text-sm">{{
+                        t('Border width')
+                      }}</label>
+                      <input
+                        id="frame-border-width"
+                        type="text"
+                        class="text-input"
+                        v-model="frameStyle.borderWidth"
+                        placeholder="1px"
+                      />
+                    </div>
+                    <div>
+                      <label for="frame-border-radius" class="mb-1 block text-sm">{{
+                        t('Border radius')
+                      }}</label>
+                      <input
+                        id="frame-border-radius"
+                        type="text"
+                        class="text-input"
+                        v-model="frameStyle.borderRadius"
+                        placeholder="8px"
+                      />
+                    </div>
+                    <div>
+                      <label for="frame-padding" class="mb-1 block text-sm">{{
+                        t('Padding')
+                      }}</label>
+                      <input
+                        id="frame-padding"
+                        type="text"
+                        class="text-input"
+                        v-model="frameStyle.padding"
+                        placeholder="16px"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </template>
             </section>
           </AccordionContent>
         </AccordionItem>

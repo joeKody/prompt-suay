@@ -359,12 +359,12 @@ export const generateEventData = (data: {
 export const detectDataType = (
   data: string
 ): {
-  type: 'text' | 'url' | 'email' | 'phone' | 'sms' | 'wifi' | 'vcard' | 'location' | 'event'
+  type: 'text' | 'url' | 'email' | 'phone' | 'sms' | 'wifi' | 'vcard' | 'location' | 'event' | 'promptpay'
   parsedData: Record<string, string | boolean>
 } => {
   // Default result
   const result: {
-    type: 'text' | 'url' | 'email' | 'phone' | 'sms' | 'wifi' | 'vcard' | 'location' | 'event'
+    type: 'text' | 'url' | 'email' | 'phone' | 'sms' | 'wifi' | 'vcard' | 'location' | 'event' | 'promptpay'
     parsedData: Record<string, string | boolean>
   } = {
     type: 'text',
