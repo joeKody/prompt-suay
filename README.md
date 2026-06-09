@@ -1,9 +1,16 @@
-# Mini QR
+# Prompt Suay
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-An app to create beautiful QR codes and scan various QR code types.
+An app to create beautiful Promptpay QR codes.  
 
+## Prompt Suay Features
+- Create and Customize personal Promptpay QR codes.
+  - With Mobile Phone Number or Thai National ID.
+
+---
+
+## Mini QR
 <div style="display:flex; flex-direction:row; flex-wrap:wrap; justify-content:center; gap:8px;">
     <a href="https://esteetey.dev"><img width="100" src="public/presets/lyqht.svg" /></a>
     <a href="https://www.padlet.com"><img width="100" src="public/presets/padlet.svg" /></a>
