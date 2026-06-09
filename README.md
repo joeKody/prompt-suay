@@ -3,6 +3,7 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 An app to create beautiful Promptpay QR codes.  
+Forked from [Mini QR](https://github.com/lyqht/mini-qr)
 
 ## Prompt Suay Features
 - Create and Customize personal Promptpay QR codes.
